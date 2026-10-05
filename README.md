@@ -6,7 +6,7 @@ HTML, CSS ve vanilla JavaScript. Derleme, npm, WordPress, PHP, veritabanı veya 
 
 Mevcut sitenin logosu, sarı/antrasit renkleri, dört ana sayfa görseli, kurumsal metinleri, referansları ve sekiz projenin fotoğrafları korunmuştur. Ana sayfa, dört menü sayfası, üç tanıtım sayfası ve sekiz proje detayı: toplam 16 içerik sayfası. Eski URL yolları korunur. `404.html` ayrıca eklenmiştir.
 
-Sayfa düzeni ve boşluklar sadeleştirilmiştir. Mobil menü, elle ilerletilen görsel bandı, proje filtreleri ve klavyeyle kapatılabilen fotoğraf penceresi bulunur. JavaScript kapalıyken sayfalar, tüm projeler, açık mobil menü ve fotoğraf bağlantıları çalışır. İletişim formu kaldırılmıştır. Telefon, e-posta ve harita bağlantıları kullanılabilir.
+Sayfa düzeni ve boşluklar sadeleştirilmiştir. Mobil menü, yan okları ve görsel seçim noktaları olan otomatik görsel bandı, durdurma/başlatma kontrolü, klavye ve dokunmatik geçiş, proje filtreleri ve klavyeyle kapatılabilen fotoğraf penceresi bulunur. JavaScript kapalıyken sayfalar, tüm projeler, açık mobil menü ve fotoğraf bağlantıları çalışır. İletişim formu kaldırılmıştır. Telefon, e-posta ve harita bağlantıları kullanılabilir.
 
 Tüm 293 görsel `assets/images/` içindedir. Google Fonts, jQuery, WordPress eklentileri, Google Maps API ve CDN bağımlılığı yoktur. Proje kategorileri kaynak sitedeki haliyle alınmıştır; yayın öncesi “Devam Eden” etiketlerinin güncelliğini kontrol edin.
 
@@ -53,7 +53,7 @@ Mevcut e-posta hizmetinin MX/TXT kayıtlarını koruyun; statik site taşıması
 
 ## Doğrulama durumu
 
-Tüm yerel bağlantılar ve görsel dosyaları kontrol edildi. JavaScript sözdizimi kontrolü geçti. WordPress kodu ve iletişim formu bulunmuyor. Bu çalışma ortamında tarayıcı başlatılamadığından gerçek tarayıcıda görsel doğrulama tamamlanmadı. Yayın öncesi masaüstü ve mobil görünümü, menüyü, filtreleri, galeri penceresini ve iletişim bağlantılarını kontrol edin.
+Tüm yerel bağlantılar ve görsel dosyaları kontrol edildi. JavaScript sözdizimi kontrolü ve carousel etkileşim testleri geçti. Otomatik geçiş, durdurma, oklar, görsel seçimi, klavye, yatay kaydırma, odak/fare duraklatması ve azaltılmış hareket tercihi test edildi. Source Sans Pro ve Montserrat yerel WOFF2 olarak eklenmiş, Türkçe karakter kapsamları doğrulanmıştır. Tarihçemiz satır sonları/vurguları ve Hakkımızda liste düzeni onarılmıştır. WordPress kodu ve iletişim formu bulunmuyor. Bu çalışma ortamında tarayıcı başlatılamadığından gerçek tarayıcıda görsel doğrulama tamamlanmadı. Yayın öncesi masaüstü ve mobil görünümü, menüyü, filtreleri, galeri penceresini ve iletişim bağlantılarını kontrol edin.
 
 Kaynak içerik 5 Ekim 2026 tarihinde https://www.kiyancinsaat.com.tr/ üzerinden alındı. GitHub deposu: https://github.com/mtahca/kiyancinsaat
 

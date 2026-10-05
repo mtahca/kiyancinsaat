@@ -20,16 +20,77 @@ document.addEventListener('keydown', (event) => {
     menuButton.focus();
   }
 });
+const hero = document.querySelector('.hero');
 const slides = [...document.querySelectorAll('.slide')];
-let slideIndex = 0;
-document.querySelectorAll('[data-slide]').forEach((button) => {
-  button.addEventListener('click', () => {
-    slides[slideIndex]?.classList.remove('active');
-    slideIndex = (slideIndex + Number(button.dataset.slide) + slides.length) % slides.length;
-    slides[slideIndex]?.classList.add('active');
-    document.querySelector('.slide-count').textContent = `${slideIndex + 1} / ${slides.length}`;
+if (hero && slides.length > 1) {
+  const dots = [...hero.querySelectorAll('[data-slide-to]')];
+  const pauseButton = hero.querySelector('.slide-pause');
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+  let slideIndex = 0;
+  let paused = reducedMotion.matches;
+  let hovered = false;
+  let focused = false;
+  let timer = null;
+  let touchStart = null;
+  const showSlide = (index, announce = false) => {
+    slideIndex = (index + slides.length) % slides.length;
+    slides.forEach((slide, i) => {
+      slide.classList.toggle('active', i === slideIndex);
+      slide.setAttribute('aria-hidden', String(i !== slideIndex));
+    });
+    dots.forEach((dot, i) => dot.setAttribute('aria-pressed', String(i === slideIndex)));
+    hero.querySelector('.slide-count').textContent = `${slideIndex + 1} / ${slides.length}`;
+    if (announce) hero.querySelector('.slide-announcement').textContent = `Görsel ${slideIndex + 1} / ${slides.length}`;
+  };
+  const updatePlayback = () => {
+    clearInterval(timer);
+    timer = null;
+    pauseButton.setAttribute('aria-label', paused ? 'Otomatik geçişi başlat' : 'Otomatik geçişi durdur');
+    pauseButton.innerHTML = paused ? '▶ <span>Başlat</span>' : 'Ⅱ <span>Durdur</span>';
+    if (!paused && !hovered && !focused && !document.hidden) {
+      timer = setInterval(() => showSlide(slideIndex + 1), 5000);
+    }
+  };
+  const navigate = (index) => {
+    paused = true;
+    showSlide(index, true);
+    updatePlayback();
+  };
+  hero.querySelectorAll('[data-slide]').forEach((button) => {
+    button.addEventListener('click', () => navigate(slideIndex + Number(button.dataset.slide)));
   });
-});
+  dots.forEach((dot) => dot.addEventListener('click', () => navigate(Number(dot.dataset.slideTo))));
+  pauseButton.addEventListener('click', () => { paused = !paused; updatePlayback(); });
+  hero.addEventListener('mouseenter', () => { hovered = true; updatePlayback(); });
+  hero.addEventListener('mouseleave', () => { hovered = false; updatePlayback(); });
+  hero.addEventListener('focusin', () => { focused = true; updatePlayback(); });
+  hero.addEventListener('focusout', (event) => {
+    if (!hero.contains(event.relatedTarget)) { focused = false; updatePlayback(); }
+  });
+  hero.addEventListener('keydown', (event) => {
+    if (event.key === 'ArrowLeft' || event.key === 'ArrowRight') {
+      event.preventDefault();
+      navigate(slideIndex + (event.key === 'ArrowLeft' ? -1 : 1));
+    }
+  });
+  hero.addEventListener('pointerdown', (event) => {
+    if (event.pointerType !== 'mouse' && !event.target.closest('button')) touchStart = {x: event.clientX, y: event.clientY};
+  });
+  hero.addEventListener('pointerup', (event) => {
+    if (!touchStart) return;
+    const dx = event.clientX - touchStart.x;
+    const dy = event.clientY - touchStart.y;
+    touchStart = null;
+    if (Math.abs(dx) > 45 && Math.abs(dx) > Math.abs(dy)) navigate(slideIndex + (dx < 0 ? 1 : -1));
+  });
+  hero.addEventListener('pointercancel', () => { touchStart = null; });
+  document.addEventListener('visibilitychange', updatePlayback);
+  reducedMotion.addEventListener('change', () => {
+    if (reducedMotion.matches) paused = true;
+    updatePlayback();
+  });
+  updatePlayback();
+}
 const filters = [...document.querySelectorAll('[data-filter]')];
 const projects = [...document.querySelectorAll('.project-card')];
 filters.forEach((button) => {

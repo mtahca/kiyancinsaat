@@ -9,9 +9,10 @@
   <meta content="1994 yılından bu yana Muğla’da konut ve yapı projeleri. Kıyanç İnşaat projelerini ve kurumsal bilgilerini keşfedin." name="description"/>
   <meta content="#454545" name="theme-color"/>
   <link href="assets/images/6a4f1b2c4f-favicon.png" rel="icon"/>
-  <link href="assets/style.css" rel="stylesheet"/>
-  <script defer="" src="assets/site.js">
+  <link href="assets/style.css?v=2" rel="stylesheet"/>
+  <script defer="" src="assets/site.js?v=2">
   </script>
+  <link as="font" crossorigin="anonymous" href="assets/fonts/source-sans-pro-400.woff2" rel="preload" type="font/woff2"/>
  </head>
  <body>
   <a class="skip-link" href="#main">
@@ -73,22 +74,40 @@
    </nav>
   </header>
   <main id="main">
-   <section aria-label="Projelerden görünümler" class="hero">
-    <img alt="Kıyanç İnşaat proje görünümü 1" class="slide active" decoding="async" loading="eager" src="assets/images/f478c125b9-kiyanc_slide22_01-1920x580.jpg"/>
-    <img alt="Kıyanç İnşaat proje görünümü 2" class="slide" decoding="async" loading="lazy" src="assets/images/eb2a7e5cfd-kiyanc_slide22_02.jpg"/>
-    <img alt="Kıyanç İnşaat proje görünümü 3" class="slide" decoding="async" loading="lazy" src="assets/images/0a03000c98-kiyanc_slide22_03.jpg"/>
-    <img alt="Kıyanç İnşaat proje görünümü 4" class="slide" decoding="async" loading="lazy" src="assets/images/e3147b4066-kiyanc_slide22_04.jpg"/>
+   <section aria-label="Kıyanç İnşaat projelerinden görünümler" aria-roledescription="carousel" class="hero" tabindex="0">
+    <img alt="Kıyanç İnşaat proje görünümü 1" aria-hidden="false" class="slide active" decoding="async" fetchpriority="high" loading="eager" src="assets/images/f478c125b9-kiyanc_slide22_01-1920x580.jpg"/>
+    <img alt="Kıyanç İnşaat proje görünümü 2" aria-hidden="true" class="slide" decoding="async" fetchpriority="low" loading="eager" src="assets/images/eb2a7e5cfd-kiyanc_slide22_02.jpg"/>
+    <img alt="Kıyanç İnşaat proje görünümü 3" aria-hidden="true" class="slide" decoding="async" fetchpriority="low" loading="eager" src="assets/images/0a03000c98-kiyanc_slide22_03.jpg"/>
+    <img alt="Kıyanç İnşaat proje görünümü 4" aria-hidden="true" class="slide" decoding="async" fetchpriority="low" loading="eager" src="assets/images/e3147b4066-kiyanc_slide22_04.jpg"/>
+    <button aria-label="Önceki görsel" class="hero-arrow hero-prev" data-slide="-1">
+     ‹
+    </button>
+    <button aria-label="Sonraki görsel" class="hero-arrow hero-next" data-slide="1">
+     ›
+    </button>
     <div class="hero-controls">
-     <button aria-label="Önceki görsel" data-slide="-1">
-      ←
-     </button>
-     <span aria-live="polite" class="slide-count">
+     <div aria-label="Görsel seçimi" class="slide-dots">
+      <button aria-label="1. görseli göster" aria-pressed="true" data-slide-to="0">
+      </button>
+      <button aria-label="2. görseli göster" aria-pressed="false" data-slide-to="1">
+      </button>
+      <button aria-label="3. görseli göster" aria-pressed="false" data-slide-to="2">
+      </button>
+      <button aria-label="4. görseli göster" aria-pressed="false" data-slide-to="3">
+      </button>
+     </div>
+     <span class="slide-count">
       1 / 4
      </span>
-     <button aria-label="Sonraki görsel" data-slide="1">
-      →
+     <button aria-label="Otomatik geçişi durdur" class="slide-pause">
+      Ⅱ
+      <span>
+       Durdur
+      </span>
      </button>
     </div>
+    <span aria-atomic="true" aria-live="polite" class="sr-only slide-announcement">
+    </span>
    </section>
    <section class="banner">
     <div class="wrap">
