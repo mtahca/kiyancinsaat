@@ -1,0 +1,9 @@
+<!doctype html>
+<html lang="tr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Sayfa bulunamadı | Kıyanç İnşaat</title></head>
+<body style="font-family:system-ui;max-width:600px;margin:10vh auto;padding:24px"><h1>Sayfa bulunamadı</h1><p>Aradığınız sayfa taşınmış olabilir.</p><a id="home" href="/">Kıyanç İnşaat ana sayfa</a>
+<script>
+if (location.hostname.endsWith('.github.io')) {
+  const segment = location.pathname.split('/').filter(Boolean)[0];
+  if (segment && !['404.html','index.html'].includes(segment)) document.querySelector('#home').href = '/' + segment + '/';
+}
+</script></body></html>
