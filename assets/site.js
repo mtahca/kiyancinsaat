@@ -23,11 +23,8 @@ document.addEventListener('keydown', (event) => {
 const hero = document.querySelector('.hero');
 const slides = [...document.querySelectorAll('.slide')];
 if (hero && slides.length > 1) {
-  const dots = [...hero.querySelectorAll('[data-slide-to]')];
-  const pauseButton = hero.querySelector('.slide-pause');
   const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
   let slideIndex = 0;
-  let paused = reducedMotion.matches;
   let hovered = false;
   let focused = false;
   let timer = null;
@@ -38,29 +35,22 @@ if (hero && slides.length > 1) {
       slide.classList.toggle('active', i === slideIndex);
       slide.setAttribute('aria-hidden', String(i !== slideIndex));
     });
-    dots.forEach((dot, i) => dot.setAttribute('aria-pressed', String(i === slideIndex)));
-    hero.querySelector('.slide-count').textContent = `${slideIndex + 1} / ${slides.length}`;
     if (announce) hero.querySelector('.slide-announcement').textContent = `Görsel ${slideIndex + 1} / ${slides.length}`;
   };
   const updatePlayback = () => {
     clearInterval(timer);
     timer = null;
-    pauseButton.setAttribute('aria-label', paused ? 'Otomatik geçişi başlat' : 'Otomatik geçişi durdur');
-    pauseButton.innerHTML = paused ? '▶ <span>Başlat</span>' : 'Ⅱ <span>Durdur</span>';
-    if (!paused && !hovered && !focused && !document.hidden) {
+    if (!reducedMotion.matches && !hovered && !focused && !document.hidden) {
       timer = setInterval(() => showSlide(slideIndex + 1), 5000);
     }
   };
   const navigate = (index) => {
-    paused = true;
     showSlide(index, true);
     updatePlayback();
   };
   hero.querySelectorAll('[data-slide]').forEach((button) => {
     button.addEventListener('click', () => navigate(slideIndex + Number(button.dataset.slide)));
   });
-  dots.forEach((dot) => dot.addEventListener('click', () => navigate(Number(dot.dataset.slideTo))));
-  pauseButton.addEventListener('click', () => { paused = !paused; updatePlayback(); });
   hero.addEventListener('mouseenter', () => { hovered = true; updatePlayback(); });
   hero.addEventListener('mouseleave', () => { hovered = false; updatePlayback(); });
   hero.addEventListener('focusin', () => { focused = true; updatePlayback(); });
@@ -86,7 +76,6 @@ if (hero && slides.length > 1) {
   hero.addEventListener('pointercancel', () => { touchStart = null; });
   document.addEventListener('visibilitychange', updatePlayback);
   reducedMotion.addEventListener('change', () => {
-    if (reducedMotion.matches) paused = true;
     updatePlayback();
   });
   updatePlayback();
