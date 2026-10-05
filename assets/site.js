@@ -88,7 +88,6 @@ filters.forEach((button) => {
     projects.forEach((project) => {
       project.hidden = button.dataset.filter !== 'all' && project.dataset.category !== button.dataset.filter;
     });
-    document.querySelector('.filter-count').textContent = `${projects.filter((project) => !project.hidden).length} proje`;
   });
 });
 const dialog = document.querySelector('.lightbox');
